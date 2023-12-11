@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Book List</h1>
+    <form method="GET">
+        <input type="text" name="q" placeholder="Search by title or author" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% if books %}
+            {% for book in books %}
+                <li><a href="{% url 'book_detail' pk=book.pk %}">{{ book.title }}</a> by {{ book.author }}</li>
+            {% empty %}
+                <li>No books found.</li>
+            {% endfor %}
+        {% else %}
+            <li>No books found.</li>
+        {% endif %}
+    </ul>
+    <a href="{% url 'book_new' %}">Add New Book</a>
+</body>
+</html>

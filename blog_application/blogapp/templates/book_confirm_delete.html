@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Deletion - {{ book.title }}</title>
+    <script>
+        function confirmDelete() {
+            var result = confirm('Are you sure you want to delete?');
+            if (result) {
+                // If the user confirms, submit the form
+                document.getElementById('deleteForm').submit();
+            }
+            // If canceled, do nothing
+        }
+    </script>
+</head>
+<body>
+    <h1>Confirm Deletion - {{ book.title }}</h1>
+    <p>Are you sure you want to delete "{{ book.title }}"?</p>
+    <form id="deleteForm" action="{% url 'book_delete' pk=book.pk %}" method="post">
+        {% csrf_token %}
+        <input type="button" value="Confirm" onclick="confirmDelete()">
+        <a href="{% url 'book_detail' pk=book.pk %}">Cancel</a>
+    </form>
+</body>
+</html>
